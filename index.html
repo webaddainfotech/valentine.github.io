@@ -1,1243 +1,226 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="auther" content="">
-  <title>TravelWalk Holidays :: Home</title>
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-  <link href="https://fonts.googleapis.com/css?family=Oxanium&display=swap" rel="stylesheet">
-  <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-onix-digital.css">
-    <link rel="stylesheet" href="assets/css/animated.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Rose Day</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #ffd1dc, #ff9a9e, #fad0c4);
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Soft overlay when popup opens */
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.overlay.active {
+  opacity: 1;
+}
+
+/* Romantic Button */
+.open-btn {
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 40px;
+  background: linear-gradient(45deg, #ff2e63, #ff5f9e);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  transition: 0.3s;
+  z-index: 2;
+}
+
+.open-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: linear-gradient(white, #fff0f5);
+  width: 90%;
+  max-width: 360px;
+  padding: 28px 22px;
+  border-radius: 25px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+  text-align: center;
+  z-index: 5;
+  transition: 0.5s ease;
+  border: 2px solid #ffb6c1;
+}
+
+.popup.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.popup h1 {
+  margin: 0;
+  color: #ff2e63;
+  font-size: clamp(1.6rem, 5vw, 2.3rem);
+  text-shadow: 0 0 8px rgba(255,46,99,0.3);
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px rgba(255,46,99,0.3); }
+  to { text-shadow: 0 0 12px rgba(255,46,99,0.6); }
+}
+
+/* Falling items */
+.fall {
+  position: absolute;
+  top: -10vh;
+  font-size: 24px;
+  animation: fallAnim linear forwards;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes fallAnim {
+  0% {
+    transform: translateY(-10vh) scale(0.8) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) scale(1.2) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* 🌹 Animated Rose Bouquet */
+.bouquet {
+  position: absolute;
+  bottom: -120px;
+  font-size: 80px;
+  animation: riseBouquet 2s ease-out forwards, float 3s infinite ease-in-out;
+  opacity: 0;
+}
+
+@keyframes riseBouquet {
+  from {
+    bottom: -120px;
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    bottom: 120px;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Floating little message */
+.floating-text {
+  position: absolute;
+  bottom: 20px;
+  color: white;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+</style>
 </head>
 
 <body>
 
-    <div class="query">
-     <a href="#price"><button type="button" data-target="#queries" data-toggle="modal"><i class="fa fa-question"></i> </button></a>
-      
-    </div>
-  
-  
-  <div class="icon-bar">
-    <a href="#" class="facebook"> <i class="fa fa-facebook"></i> </a>
-  
-   <a href="#" class="twitter"> <i class="fa fa-twitter"></i> </a>
-   
-    <a href="#" class="google"> <i class="fa fa-google"></i> </a>
-    
-     <a href="#" class="linkedin"> <i class="fa fa-linkedin"></i> </a>
-     
-      <a href="#" class="youtube"> <i class="fa fa-youtube"></i> </a>
-      </div>
-    
-    
-    
+<div class="overlay" id="overlay"></div>
 
-  <section id="header">
-    
-    <div class=" bgcolor">
-      <nav class="navbar fixed-top  navbar-expand-md navbar-light nv">
-        <a class="navbar-brand" href="#"><img src="https://image.flaticon.com/icons/svg/2373/2373830.svg " class="logo">TraveWebs</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fa fa-bars" aria-hidden="true"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#header">Home </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#services">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#price">Popular Destinations</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#why">Why Choose Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#testimonyy">Customer Reviews</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#con">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      </div>
-    
-    <div class="banner">
-      <div class="container ban">
-        <h1 class="bannerhead  text-center">Welcome to TravWebs</h1>
-        <p class="text-center">The only holiday partner deals in Clients Itinerary and Expectations</p>
-      </div>
-    </div>
-  </section>
-  <section id="services">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 hvr">
-          <i class="fa fa-3x fa-list " aria-hidden="true"></i>
-          <h1>Customized Tour</h1>
-          <p>Customize the tour as per your requirement and enjoy the holiday with your family and friends only on affordable price.</p>
-        </div>
-        <div class="col-md-4 hvr">
-          <i class="fa fa-3x fa-users" aria-hidden="true"></i>
-          <h1>Group Tour</h1>
-          <p>Groups Tours are designed in such a way the you never feel that your family is away </p>
-        </div>
-        <div class="col-md-4 hvr">
-          <i class="fa fa-3x fa-user" aria-hidden="true"></i>
-          <h1>Personalized Tour</h1>
-          <p>Persolised tour can help you to persolised your trip as per your choice.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="destination">
-    <div class="container">
-      <h1>Destination Cover</h1>
-      <div class="dest">
-        <div class="des">
-          <h2 class="desti">25</h2>
-          <p>Manali Volvo</p>
-        </div>
-        <div class="des">
-          <h2 class="desti">20</h2>
-          <p>Himachal</p>
-        </div>
-        <div class="des">
-          <h2 class="desti">15</h2>
-          <p>Kerala</p>
-        </div>
-        <div class="des">
-          <h2 class="desti">09</h2>
-          <p>Kashmir</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="price" class="prices">
-    <h1>Featured Destination Package</h1>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 pb-2">
-          <div class="card">
-            <div class="card-header">
-              <h2 class="text-center hea">Adventure Hills In Manali</h2>
-              <p class="text-center para">Delhi(0)→Manali(3N) </p>
-              <img class="card-img-top img-fluid mx-auto d-block logo-card" src="https://cdn.pixabay.com/photo/2016/10/15/16/26/trekking-1742821_1280.jpg">
-            </div>
-            <div class="card-body">
-              <ul class="list">
-                <li>3* or Similar </li>
-                <li>
-                  Handpicked Hotel
-                </li>
-                <li>Private Cab For Sightseeing</li>
-                <li>Standard 3N4D Package</li>
-                <li>Delhi-Manali-Delhi Volvo Bus</li>
-                <li>Daily Breakfast and Dinner</li>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <div class="cardf">
-                <i class="fa fa-1x fa-bed" aria-hidden="true"></i>
-                <i class="fa fa-bus" aria-hidden="true"></i>
-                <i class="fa fa-cutlery" aria-hidden="true"></i>
-                <i class="fa fa-taxi" aria-hidden="true"></i>
-                <div class="stars">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                </div>
-              </div>
-              <!-- Button to Open the Modal -->
-             <button type="button" class="btn btn-primary" data-target="#myModel" data-toggle="modal">View Details</button>
-              <div class="modal fade" id="myModel">
-                <div class="modal-dialog modal-lg modal-dialog-scrollable   modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4>Adventure Hills In Manali</h4>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                      <h4 class="text-center"><u>Itinerary:</u></h4>
-                      <p class="text-center"><b> Delhi(0)→Manali(3N) </b> </p>
-                      <h6>DAY 1:-DELHI - MANALI (Overnight Journey)</h6>
-                      <p>Volvo from New Delhi.Take the Volvo and enjoy overnight Journey</p>
-                      <h6>Day - 2: Arrival at MANALI. Local City tour of Manali.</h6>
-                      <p>Early morning arrival i to Manali. Meet our representative upon arrival at Manali and transfer to your pre-booked hotel. After the rest get ready for the sightseeing tour of the Manali hill station and visit the Hadimba Devi Temple, Manu Temple, Tibetan Monasteries and Vashist Village. Afternoon is free for your own leisure activities. Dinner and overnight stay at the hotel.</p>
-                      <h6>Day 3:-MANALI-Trip to Solange Valley.</h6>
-                      <p>Proceed for a full day excursion by visiting the several prominent places such as the Kothi Gorge, Gulaba Marhi Solang Valley. In the evening, return to your hotel, enjoy the scrumptious dinner and a comfortable overnight stay.</p>
-                      <h6>Day 4-MANALI - MANIKARAN VIA KULLU - MANALI</h6>
-                      <p>After breakfast, check out of your hotel in Manali and drive to Manikaran, which is situated about 75 kms from Kullu. Manikaran is essentially a sacred pilgrimage place, especially for the Hindus. It is believed that the Lord Manu recreated human life in Manikaran after the severe flood. The place is replete with several temples and a gurudwara. After the sightseeing in Manikaran, drive to Kullu for a half day sightseeing tour. Dinner and overnight stay at Manali.</p>
-                      <h6>Day 5:-MANALI - DELHI</h6>
-                      <p>After breakfast, early morning drive from Manali to Delhi for your onward destination.
-                        Tour and Services ends</p>
-                      <h4 class="text-center"><u>Inclusions:</u></h4>
-                      <ul class="list1">
-                        <li>3*-4* Hotel</li>
-                  
-                        <li>
-                          Handpicked Hotel
-                        </li>
-                        <li>Private Cab For Sightseeing</li>
-                        <li>Standard 3N4D Package</li>
-                        <li>Delhi-Manali-Delhi Volvo Bus</li>
-                        <li>Daily Breakfast and Dinner</li>
-                      </ul>
-                      <h4 class="text-center"><u>Exclusions:</u></h4>
-                      <ul>
-                        <li>Cost of flights/ trains/ bus journey unless specified.</li>
-                        <li> Cost of early arrival/ late departure.</li>
-                        <li>Cost of amendment/addition in the itinerary.</li>
-                        <li>Meals other than breakfast unless specified.</li>
-                        <li>Cost of entrance fees, camera & video charges.</li>
-                        <li>Cost of additional activities other than what is included, Porterages, tips etc.</li>
-                        <li>Travel/Medical insurance.</li>
-                        <li>Anything not mentioned in the inclusions.</li>
-                      </ul>
-                      <h4 class="text-center"><u>Package Stars:</u></h4>
-                      <div class="cardf">
-                        <i class="fa fa-1x fa-bed" aria-hidden="true"></i>
-                        <i class="fa fa-bus" aria-hidden="true"></i>
-                        <i class="fa fa-cutlery" aria-hidden="true"></i>
-                        <i class="fa fa-taxi" aria-hidden="true"></i>
-                        <div class="stars">
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" data-dismiss="modal" class="btn btn-danger">Close</button>
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal1">Contact</button>
-                      <div class="modal fade" id="modal1">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable  ">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h4 class="text-center" style="color:red">Contact Us</h4>
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                               <ul class="modalclass">
-                                 <li> <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i> </li>
-                               <li>  <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i></li>
-                                 <li><i class="fa fa-envelope-o" aria-hidden="true"></i> bookings@travewebs.com </li>
-                                 <li><i class="fa fa-envelope-o" aria-hidden="true"></i> operation@travewebs.com </li>
-                                 <li><i class="fa fa-envelope-o" aria-hidden="true"></i> escalation@travewebs.com</li>
-                               </ul>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 pb-2">
-          <div class="card">
-            <div class="card-header">
-              <h2 class="text-center hea">Way to Manali<span class="cole"> Honeymoon Special</span></h2>
-              <p class="text-center para">Delhi(0)→Manali(3N) </p>
-              <img class="card-img-top logo-card img-fluid mx-auto d-block" src="https://cdn.pixabay.com/photo/2016/12/30/23/06/beas-river-1941786_1280.jpg">
-            </div>
-            <div class="card-body">
-              <ul class="list">
-                <li>3*-4* Hotel</li>
-                <li>Honeymoon Special Kit</li>
-                <li>
-                  Handpicked Hotel
-                </li>
-                <li>Private Cab For Sightseeing</li>
-                <li>Standard 3N4D Package</li>
-                <li>Delhi-Manali-Delhi Volvo Bus</li>
-                <li>Daily Breakfast and Dinner</li>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <div class="cardf">
-                <i class="fa fa-1x fa-bed" aria-hidden="true"></i>
-                <i class="fa fa-bus" aria-hidden="true"></i>
-                <i class="fa fa-cutlery" aria-hidden="true"></i>
-                <i class="fa fa-taxi" aria-hidden="true"></i>
-                <div class="stars">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                </div>
-              </div>
-           <button type="button" class="btn btn-primary" data-target="#myModel1" data-toggle="modal">View Details</button>
-              <div class="modal fade" id="myModel1">
-                <div class="modal-dialog modal-lg modal-dialog-scrollable   modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4>Way to Manali Honeymoon Special</h4>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                      <h4 class="text-center"><u>Itinerary:</u></h4>
-                      <p class="text-center"><b> Delhi(0)→Manali(3N) </b> </p>
-                      <h6>DAY 1:-DELHI - MANALI (Overnight Journey)</h6>
-                      <p>Volvo from New Delhi.Take the Volvo and enjoy overnight Journey</p>
-                      <h6>Day - 2: Arrival at MANALI. Local City tour of Manali.</h6>
-                      <p>Early morning arrival i to Manali. Meet our representative upon arrival at Manali and transfer to your pre-booked hotel. After the rest get ready for the sightseeing tour of the Manali hill station and visit the Hadimba Devi Temple, Manu Temple, Tibetan Monasteries and Vashist Village. Afternoon is free for your own leisure activities. Dinner and overnight stay at the hotel.</p>
-                      <h6>Day 3:-MANALI-Trip to Solange Valley.</h6>
-                      <p>Proceed for a full day excursion by visiting the several prominent places such as the Kothi Gorge, Gulaba Marhi Solang Valley. In the evening, return to your hotel, enjoy the scrumptious dinner and a comfortable overnight stay.</p>
-                      <h6>Day 4-MANALI - MANIKARAN VIA KULLU - MANALI</h6>
-                      <p>After breakfast, check out of your hotel in Manali and drive to Manikaran, which is situated about 75 kms from Kullu. Manikaran is essentially a sacred pilgrimage place, especially for the Hindus. It is believed that the Lord Manu recreated human life in Manikaran after the severe flood. The place is replete with several temples and a gurudwara. After the sightseeing in Manikaran, drive to Kullu for a half day sightseeing tour. Dinner and overnight stay at Manali.</p>
-                      <h6>Day 5:-MANALI - DELHI</h6>
-                      <p>After breakfast, early morning drive from Manali to Delhi for your onward destination.
-                        Tour and Services ends</p>
-                      <h4 class="text-center"><u>Inclusions:</u></h4>
-                      <ul class="list1">
-                        <li>3*-4* Hotel</li>
-                        <li><b>Honeymoon Special Kit(Honeymoon Cake,Flowe Bed Decorations,Candle Lite Dinner)</b></li>
-                        <li>
-                          Handpicked Hotel
-                        </li>
-                        <li>Private Cab For Sightseeing</li>
-                        <li>Standard 3N4D Package</li>
-                        <li>Delhi-Manali-Delhi Volvo Bus</li>
-                        <li>Daily Breakfast and Dinner</li>
-                      </ul>
-                      <h4 class="text-center"><u>Exclusions:</u></h4>
-                      <ul>
-                        <li>Cost of flights/ trains/ bus journey unless specified.</li>
-                        <li> Cost of early arrival/ late departure.</li>
-                        <li>Cost of amendment/addition in the itinerary.</li>
-                        <li>Meals other than breakfast unless specified.</li>
-                        <li>Cost of entrance fees, camera & video charges.</li>
-                        <li>Cost of additional activities other than what is included, Porterages, tips etc.</li>
-                        <li>Travel/Medical insurance.</li>
-                        <li>Anything not mentioned in the inclusions.</li>
-                      </ul>
-                      <h4 class="text-center"><u>Package Stars:</u></h4>
-                      <div class="cardf">
-                        <i class="fa fa-1x fa-bed" aria-hidden="true"></i>
-                        <i class="fa fa-bus" aria-hidden="true"></i>
-                        <i class="fa fa-cutlery" aria-hidden="true"></i>
-                        <i class="fa fa-taxi" aria-hidden="true"></i>
-                        <div class="stars">
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" data-dismiss="modal" class="btn btn-danger">Close</button>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal2">Contact</button>
-                      <div class="modal fade" id="modal2">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable  ">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h4 class="text-center" style="color:red">Contact Us</h4>
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                              <ul class="modalclass">
-                                <li> <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i> </li>
-                                <li> <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i></li>
-                                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> bookings@travewebs.com </li>
-                                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> operation@travewebs.com </li>
-                                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> escalation@travewebs.com</li>
-                              </ul>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 pb-2">
-          <div class="card">
-            <div class="card-header">
-              <h2 class="text-center hea">Mysterious Manali</h2>
-              <p class="text-center para">Delhi(0)→Manali(3N) </p>
-              <img class="card-img-top mx-auto d-block logo-card img-fluid" src="https://cdn.pixabay.com/photo/2020/02/06/17/07/snow-4824899_1280.jpg">
-            </div>
-            <div class="card-body">
-              <ul class="list">
-                <li>
-                  Handpicked Hotel
-                </li>
-                <li>Private Cab For Sightseeing</li>
-                <li>Standard 3N4D Package</li>
-                <li>Delhi-Manali-Delhi Volvo Bus</li>
-                <li>Daily Breakfast and Dinner</li>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <div class="cardf">
-                <i class="fa fa-1x fa-bed" aria-hidden="true"></i>
-                <i class="fa fa-bus" aria-hidden="true"></i>
-                <i class="fa fa-cutlery" aria-hidden="true"></i>
-                <i class="fa fa-taxi" aria-hidden="true"></i>
-                <div class="stars">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                </div>
-              </div>
-           <button type="button" class="btn btn-primary" data-target="#myModel2" data-toggle="modal">View Details</button>
-              <div class="modal fade" id="myModel2">
-                <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4> Mysterious Manali  </h4>
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                      <h4 class="text-center"><u>Itinerary:</u></h4>
-                      <p class="text-center"><b> Delhi(0)→Manali(3N) </b> </p>
-                      <h6>DAY 1:-DELHI - MANALI (Overnight Journey)</h6>
-                      <p>Volvo from New Delhi.Take the Volvo and enjoy overnight Journey</p>
-                      <h6>Day - 2: Arrival at MANALI. Local City tour of Manali.</h6>
-                      <p>Early morning arrival i to Manali. Meet our representative upon arrival at Manali and transfer to your pre-booked hotel. After the rest get ready for the sightseeing tour of the Manali hill station and visit the Hadimba Devi Temple, Manu Temple, Tibetan Monasteries and Vashist Village. Afternoon is free for your own leisure activities. Dinner and overnight stay at the hotel.</p>
-                      <h6>Day 3:-MANALI-Trip to Solange Valley.</h6>
-                      <p>Proceed for a full day excursion by visiting the several prominent places such as the Kothi Gorge, Gulaba Marhi Solang Valley. In the evening, return to your hotel, enjoy the scrumptious dinner and a comfortable overnight stay.</p>
-                      <h6>Day 4-MANALI - MANIKARAN VIA KULLU - MANALI</h6>
-                      <p>After breakfast, check out of your hotel in Manali and drive to Manikaran, which is situated about 75 kms from Kullu. Manikaran is essentially a sacred pilgrimage place, especially for the Hindus. It is believed that the Lord Manu recreated human life in Manikaran after the severe flood. The place is replete with several temples and a gurudwara. After the sightseeing in Manikaran, drive to Kullu for a half day sightseeing tour. Dinner and overnight stay at Manali.</p>
-                      <h6>Day 5:-MANALI - DELHI</h6>
-                      <p>After breakfast, early morning drive from Manali to Delhi for your onward destination.
-                        Tour and Services ends</p>
-                      <h4 class="text-center"><u>Inclusions:</u></h4>
-                      <ul class="list1">
-                        <li>3*-4* Hotel</li>
-                    
-                        <li>
-                          Handpicked Hotel
-                        </li>
-                        <li>Private Cab For Sightseeing</li>
-                        <li>Standard 3N4D Package</li>
-                        <li>Delhi-Manali-Delhi Volvo Bus</li>
-                        <li>Daily Breakfast and Dinner</li>
-                      </ul>
-                      <h4 class="text-center"><u>Exclusions:</u></h4>
-                      <ul>
-                        <li>Cost of flights/ trains/ bus journey unless specified.</li>
-                        <li> Cost of early arrival/ late departure.</li>
-                        <li>Cost of amendment/addition in the itinerary.</li>
-                        <li>Meals other than breakfast unless specified.</li>
-                        <li>Cost of entrance fees, camera & video charges.</li>
-                        <li>Cost of additional activities other than what is included, Porterages, tips etc.</li>
-                        <li>Travel/Medical insurance.</li>
-                        <li>Anything not mentioned in the inclusions.</li>
-                      </ul>
-                      <h4 class="text-center"><u>Package Stars:</u></h4>
-                      <div class="cardf">
-                        <i class="fa fa-1x fa-bed" aria-hidden="true"></i>
-                        <i class="fa fa-bus" aria-hidden="true"></i>
-                        <i class="fa fa-cutlery" aria-hidden="true"></i>
-                        <i class="fa fa-taxi" aria-hidden="true"></i>
-                        <div class="stars">
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star" aria-hidden="true"></i>
-                          <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" data-dismiss="modal" class="btn btn-danger">Close</button>
-                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal3">Contact</button>
-                      <div class="modal fade" id="modal3">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable  ">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h4 class="text-center" style="color:red">Contact Us</h4>
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                              <ul class="modalclass">
-                                <li> <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i> </li>
-                                <li> <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i></li>
-                                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> bookings@travewebs.com </li>
-                                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> operation@travewebs.com </li>
-                                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> escalation@travewebs.com</li>
-                              </ul>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4 pb-2">
-            <div class="card">
-              <div class="card-header">
-                <h2 class="text-center hea">5 Days in God's Own Country:Keral</h2>
-                <p class="text-center para">
-                  Munnar(2N)→Thekaddy(1N)→Alleppey(1N)</p>
-                <img class="card-img-top mx-auto d-block logo-card img-fluid" src="https://cdn.pixabay.com/photo/2017/11/13/16/19/tea-2946057_1280.jpg">
-              </div>
-              <div class="card-body">
-                <ul class="list">
-                  <li>3* or Similar </li>
-                  <li>Houseboat Stay</li>
-                  <li>
-                    Handpicked Hotel
-                  </li>
-                  <li>Private Cab For Sightseeing</li>
-                  <li>Standard 4N5D Package</li>
-                  <li>Flights</li>
-                  <li>Daily Breakfast</li>
-                </ul>
-              </div>
-              <div class="card-footer">
-                <div class="cardf">
-                  <i class="fa fa-1x fa-bed" aria-hidden="true"></i>
-                  <i class="fa fa-plane" aria-hidden="true"></i>
-                  <i class="fa fa-cutlery" aria-hidden="true"></i>
-                  <i class="fa fa-taxi" aria-hidden="true"></i>
-                  <i class="fa fa-ship" aria-hidden="true"></i>
-                  <div class="stars">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                  </div>
-                </div>
-            <button type="button" class="btn btn-primary" data-target="#myModel3" data-toggle="modal">View Details</button>
-                <div class="modal fade" id="myModel3">
-                  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4>5 Days in God's Own Country:Keral </h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      </div>
-                      <div class="modal-body">
-                        <h4 class="text-center"><u>Itinerary:</u></h4>
-                        <p class="text-center"><b> Munnar(2N)→Thekaddy(1N)→Alleppey(1N)  </b> </p>
-                        <h6>Day 1: Cochin – Munnar (140 kms / 04 hrs drive)</h6>
-                        <p>On arrival meet & assistance at Cochin airport. Proceed to Munnar. On your way visit tea and spice plantations, Cheeyappara waterfalls, view point etc. Arrive Munnar and check in your hotel . Rest of the day free for your own activities. Overnight stay at hotel.</p>
-                        <h6>Day 2: Munnar:Local Sightseeing</h6>
-                        <p>After Breakfast at Hotel, you will proceed for full day sightseeing across Munnar. Places & Activities of Interest – Echo Point,Kundala Lake, Kundala Dam,Indo Swiss Livestock Project, Mattupetty Lake & Mattupetty Dam, Munnar BoatingMunnar Tea gardens, Munnar Tea museum & Tea factory,Blossom Park, Munnar Elephant Ride, Pothamedu View Point,Hydel Park,Photo Shooting Points, Rajamalai Eravikulam National Park, Anamudi peak,Tea Powder Shopping,Punarjani traditional Village ,Lock Heart You can visit inline with time available with you. Overnight at Munnar.</p>
-                        <h6>Day 3: Munnar – Thekkady (110 kms / 3 hrs drive)</h6>
-                        <p>After breakfast, proceed to Thekkady. Transfer to hotel & relax. Afternoon, proceed for sightseeing –The Periyar wildlife sanctuary is thick evergreen forest, declared a Tiger Reserve in 1978. The splendid artificial lake formed by the Mullaperiyar Dam across the Periyar river adds to the charm of the park.You can also do a things in Thekkady like – Boat cruises on the Periyar lake, visit cardamom, pepper, tea & coffee plantation. Overnight at hotel.</p>
-                        <h6>Day 4: Thekkady – Alleppey (190 km / 6 hrs) Alleppey Houseboat</h6>
-                        <p>Morning after breakfast proceed to Alleppey , where you will be booked to stay overnight on the Houseboat. Staying in Houseboat is breathtakingly stimulating experience. While sailing down a maze of canals one sees different scenes from the villages, paddy fields, coconut palms, fisherman and local life. Lunch, evening tea & snacks, dinner next day breakfast and will be provided in the boat. The cool breeze from the Lake make you sleep early in the night after anchoring in a fancy place. Overnight at Houseboat.</p>
-                        <h6>Day 5: Cochin drop</h6>
-                        <p>After breakfast check out the hotel and drop at Cochin airport / Railway station.</p>
-                        <h4 class="text-center"><u>Inclusions:</u></h4>
-                        <ul class="list1">
-                          <li>3*-4* Hotel</li>
-                          <li><b>Houseboat stay vat Alleppey with B/F Lunch and Dinner</b></li>
-                          <li>
-                            Handpicked Hotel
-                          </li>
-                          <li>Private Cab For Sightseeing</li>
-                          <li>Standard 4N5D Package</li>
-                          
-                          <li>Daily Breakfast</li>
-                        </ul>
-                        <h4 class="text-center"><u>Exclusions:</u></h4>
-                        <ul>
-                          <li>Cost of flights/ trains/ bus journey unless specified.</li>
-                          <li> Cost of early arrival/ late departure.</li>
-                          <li>Cost of amendment/addition in the itinerary.</li>
-                          <li>Meals other than breakfast unless specified.</li>
-                          <li>Cost of entrance fees, camera & video charges.</li>
-                          <li>Cost of additional activities other than what is included, Porterages, tips etc.</li>
-                          <li>Travel/Medical insurance.</li>
-                          <li>Anything not mentioned in the inclusions.</li>
-                        </ul>
-                        <h4 class="text-center"><u>Package Stars:</u></h4>
-                        <div class="cardf">
-                          <i class="fa fa-1x fa-bed" aria-hidden="true"></i>
-                          <i class="fa fa-plane" aria-hidden="true"></i>
-                          <i class="fa fa-cutlery" aria-hidden="true"></i>
-                          <i class="fa fa-taxi" aria-hidden="true"></i>
-                          <div class="stars">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" data-dismiss="modal" class="btn btn-danger">Close</button>
-                       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal4">Contact</button>
-                        <div class="modal fade" id="modal4">
-                          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable  ">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h4 class="text-center" style="color:red">Contact Us</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              </div>
-                              <div class="modal-body">
-                                <ul class="modalclass">
-                                  <li> <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i> </li>
-                                  <li> <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i></li>
-                                  <li><i class="fa fa-envelope-o" aria-hidden="true"></i> bookings@travewebs.com </li>
-                                  <li><i class="fa fa-envelope-o" aria-hidden="true"></i> operation@travewebs.com </li>
-                                  <li><i class="fa fa-envelope-o" aria-hidden="true"></i> escalation@travewebs.com</li>
-                                </ul>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 pb-2">
-            <div class="card">
-              <div class="card-header">
-                <h2 class="text-center hea">Backwaters Adventure Kerala</h2>
-                <p class="text-center para"> Munnar(2N)→Alleppey(1N)
-                </p>
-                <img class="card-img-top mx-auto d-block logo-card img-fluid" src="https://cdn.pixabay.com/photo/2017/09/27/06/31/houseboat-kerala-2791119_1280.jpg ">
-              </div>
-              <div class="card-body">
-                <ul class="list">
-                  <li>3*-4* Hotel</li>
-                  <li>Houseboat Stay</li>
-                  <li>
-                    Handpicked Hotel
-                  </li>
-                  <li>Private Cab For Sightseeing</li>
-                  <li>Standard 3N4D Package</li>
-                  <li>Flights</li>
-                  <li>Daily Breakfast Except Houseboat</li>
-                </ul>
-              </div>
-              <div class="card-footer">
-                <div class="cardf">
-                  <i class="fa fa-1x fa-bed" aria-hidden="true"></i>
-                  <i class="fa fa-plane" aria-hidden="true"></i>
-                  <i class="fa fa-cutlery" aria-hidden="true"></i>
-                  <i class="fa fa-taxi" aria-hidden="true"></i>
-                  <i class="fa fa-ship" aria-hidden="true"></i>
-                  <div class="stars">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                  </div>
-                </div>
-             <button type="button" class="btn btn-primary" data-target="#myModel4" data-toggle="modal">View Details</button>
-                <div class="modal fade" id="myModel4">
-                  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4>Backwaters Adventure Kerala </h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      </div>
-                      <div class="modal-body">
-                        <h4 class="text-center"><u>Itinerary:</u></h4>
-                        <p class="text-center"><b>     Munnar(2N)→Alleppey(1N)  </b> </p>
-                <h6>Day 1: Cochin – Munnar (140 kms / 04 hrs drive)</h6>
-                          <p>On arrival meet & assistance at Cochin airport. Proceed to Munnar. On your way visit tea and spice plantations, Cheeyappara waterfalls, view point etc. Arrive Munnar and check in your hotel . Rest of the day free for your own activities. Overnight stay at hotel.</p>
-                          <h6>Day 2: Munnar:Local Sightseeing</h6>
-                          <p>After Breakfast at Hotel, you will proceed for full day sightseeing across Munnar. Places & Activities of Interest – Echo Point,Kundala Lake, Kundala Dam,Indo Swiss Livestock Project, Mattupetty Lake & Mattupetty Dam, Munnar BoatingMunnar Tea gardens, Munnar Tea museum & Tea factory,Blossom Park, Munnar Elephant Ride, Pothamedu View Point,Hydel Park,Photo Shooting Points, Rajamalai Eravikulam National Park, Anamudi peak,Tea Powder Shopping,Punarjani traditional Village ,Lock Heart You can visit inline with time available with you. Overnight at Munnar.</p>
-                          <h6>Day 3: Munnar – Alleppey (110 kms / 3 hrs drive)</h6>
-                          <p>Morning after breakfast proceed to Alleppey , where you will be booked to stay overnight on the Houseboat. Staying in Houseboat is breathtakingly stimulating experience. While sailing down a maze of canals one sees different scenes from the villages, paddy fields, coconut palms, fisherman and local life. Lunch, evening tea & snacks, dinner next day breakfast and will be provided in the boat. The cool breeze from the Lake make you sleep early in the night after anchoring in a fancy place. Overnight at Houseboat.</p>
-                          <h6>Day 4: Cochin drop</h6>
-                          <p>After breakfast check out the hotel and drop at Cochin airport / Railway station.</p>
-                        <h4 class="text-center"><u>Inclusions:</u></h4>
-                        <ul class="list1">
-                          <li>3*-4* Hotel</li>
-                          <li><b>Houseboat stay at Alleppey with all meal</b></li>
-                          <li>
-                            Handpicked Hotel
-                          </li>
-                          <li>Private Cab For Sightseeing</li>
-                          <li>Standard 3N4D Package</li>
-                          
-                          <li>Daily Breakfast and Dinner</li>
-                        </ul>
-                        <h4 class="text-center"><u>Exclusions:</u></h4>
-                        <ul>
-                          <li>Cost of flights/ trains/ bus journey unless specified.</li>
-                          <li> Cost of early arrival/ late departure.</li>
-                          <li>Cost of amendment/addition in the itinerary.</li>
-                          <li>Meals other than breakfast unless specified.</li>
-                          <li>Cost of entrance fees, camera & video charges.</li>
-                          <li>Cost of additional activities other than what is included, Porterages, tips etc.</li>
-                          <li>Travel/Medical insurance.</li>
-                          <li>Anything not mentioned in the inclusions.</li>
-                        </ul>
-                        <h4 class="text-center"><u>Package Stars:</u></h4>
-                        <div class="cardf">
-                          <i class="fa fa-1x fa-bed" aria-hidden="true"></i>
-                          <i class="fa fa-plane" aria-hidden="true"></i>
-                          <i class="fa fa-cutlery" aria-hidden="true"></i>
-                          <i class="fa fa-taxi" aria-hidden="true"></i>
-                          <div class="stars">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" data-dismiss="modal" class="btn btn-danger">Close</button>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal5">Contact</button>
-                        <div class="modal fade" id="modal5">
-                          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable  ">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h4 class="text-center" style="color:red">Contact Us</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              </div>
-                              <div class="modal-body">
-                                <ul class="modalclass">
-                                  <li> <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i> </li>
-                                  <li> <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i></li>
-                                  <li><i class="fa fa-envelope-o" aria-hidden="true"></i> bookings@travewebs.com </li>
-                                  <li><i class="fa fa-envelope-o" aria-hidden="true"></i> operation@travewebs.com </li>
-                                  <li><i class="fa fa-envelope-o" aria-hidden="true"></i> escalation@travewebs.com</li>
-                                </ul>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 pb-2">
-            <div class="card">
-              <div class="card-header">
-                <h2 class="text-center hea">Hills With Beaches Kerala</h2>
-                <p class="text-center para">Munnar(2N)→Thekaddy(1N)→Alleppey(1N)→Kovalam(1N) </p>
-                <img class="card-img-top mx-auto d-block logo-card img-fluid" src="https://cdn.pixabay.com/photo/2016/01/14/03/25/sunset-1139293_1280.jpg">
-              </div>
-              <div class="card-body">
-                <ul class="list">
-                  <li>4* Hotel</li>
-                  <li>
-                    Handpicked Hotel
-                  </li>
-                  <li>Houseboat Stay</li>
-                  <li>Private Cab For Sightseeing</li>
-                  <li>Standard 6N7D Package</li>
-                  <li>Flights</li>
-                  <li>Daily Breakfast</li>
-                </ul>
-              </div>
-              <div class="card-footer">
-                <div class="cardf">
-                  <i class="fa fa-1x fa-bed" aria-hidden="true"></i>
-                  <i class="fa fa-bus" aria-hidden="true"></i>
-                  <i class="fa fa-cutlery" aria-hidden="true"></i>
-                  <i class="fa fa-taxi" aria-hidden="true"></i>
-                  <i class="fa fa-ship" aria-hidden="true"></i>
-                  <div class="stars">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                  </div>
-                </div>
-           <button type="button" class="btn btn-primary" data-target="#myModel6" data-toggle="modal">View Details</button>
-                <div class="modal fade" id="myModel6">
-                  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4>Hills With Beaches Kerala</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      </div>
-                      <div class="modal-body">
-                        <h4 class="text-center"><u>Itinerary:</u></h4>
-                        <p class="text-center"><b> Munnar(2N)→Thekaddy(1N)→Alleppey(1N)→Kovalam(2N)   </b> </p>
-                        <h6>Day 1: Cochin – Munnar (140 kms / 04 hrs drive)</h6>
-                        <p>On arrival meet & assistance at Cochin airport. Proceed to Munnar. On your way visit tea and spice plantations, Cheeyappara waterfalls, view point etc. Arrive Munnar and check in your hotel . Rest of the day free for your own activities. Overnight stay at hotel.</p>
-                        <h6>Day 2: Munnar:Local Sightseeing</h6>
-                        <p>After Breakfast at Hotel, you will proceed for full day sightseeing across Munnar. Places & Activities of Interest – Echo Point,Kundala Lake, Kundala Dam,Indo Swiss Livestock Project, Mattupetty Lake & Mattupetty Dam, Munnar BoatingMunnar Tea gardens, Munnar Tea museum & Tea factory,Blossom Park, Munnar Elephant Ride, Pothamedu View Point,Hydel Park,Photo Shooting Points, Rajamalai Eravikulam National Park, Anamudi peak,Tea Powder Shopping,Punarjani traditional Village ,Lock Heart You can visit inline with time available with you. Overnight at Munnar.</p>
-                        <h6>Day 3: Munnar – Thekkady (110 kms / 3 hrs drive)</h6>
-                        <p>After breakfast, proceed to Thekkady. Transfer to hotel & relax. Afternoon, proceed for sightseeing –The Periyar wildlife sanctuary is thick evergreen forest, declared a Tiger Reserve in 1978. The splendid artificial lake formed by the Mullaperiyar Dam across the Periyar river adds to the charm of the park.You can also do a things in Thekkady like – Boat cruises on the Periyar lake, visit cardamom, pepper, tea & coffee plantation. Overnight at hotel.</p>
-                        <h6>Day 4: Thekkady – Alleppey (190 km / 6 hrs) Alleppey Houseboat</h6>
-                        <p>Morning after breakfast proceed to Alleppey , where you will be booked to stay overnight on the Houseboat. Staying in Houseboat is breathtakingly stimulating experience. While sailing down a maze of canals one sees different scenes from the villages, paddy fields, coconut palms, fisherman and local life. Lunch, evening tea & snacks, dinner next day breakfast and will be provided in the boat. The cool breeze from the Lake make you sleep early in the night after anchoring in a fancy place. Overnight at Houseboat.</p>
-                        <h6>Day 5: Alleppey - Kovalam (150 km / 4 hrs)</h6>
-                        <p>After breakfast, transfer to hotel at Kovalam. Later go for half day city tour covering Museum complex, Sri. Padmanabha Swamy Temple, Science & Technology museum, Veli tourist village, Aakulam boat club, Shangmugham Beach. Overnight stay at Kovalam.</p>
-                        <h6>Day 6: Kovalam:Local Sightseeing</h6>
-                            <p>Full day free at the resort for Ayurveda treatment and enjoy the resort facilities or visit to Kovalam Beach. This internationally renowned beach has been a favorite haunt of tourists since the 1930s. Kovalam consists of three adjacent crescent beaches. The southernmost as the light house beach, is the most popular. Overnight at hotel in Kovalam.</p>
-                            <h6>Day 7: Trivendrum drop</h6>
-                            <p>After breakfast check out the hotel and drop at Trivendrum airport / Railway station.</p>
-                 
-                        <h4 class="text-center"><u>Inclusions:</u></h4>
-                        <ul class="list1">
-                          <li>3*-4* Hotel</li>
-                          <li><b> Hoseboat Stay with all meal</b></li>
-                          <li>
-                            Handpicked Hotel
-                          </li>
-                          <li>Private Cab For Sightseeing</li>
-                          <li>Standard 6N7D Package</li>
-                          
-                          <li>Daily Breakfast </li>
-                        </ul>
-                        <h4 class="text-center"><u>Exclusions:</u></h4>
-                        <ul>
-                          <li>Cost of flights/ trains/ bus journey unless specified.</li>
-                          <li> Cost of early arrival/ late departure.</li>
-                          <li>Cost of amendment/addition in the itinerary.</li>
-                          <li>Meals other than breakfast unless specified.</li>
-                          <li>Cost of entrance fees, camera & video charges.</li>
-                          <li>Cost of additional activities other than what is included, Porterages, tips etc.</li>
-                          <li>Travel/Medical insurance.</li>
-                          <li>Anything not mentioned in the inclusions.</li>
-                        </ul>
-                        <h4 class="text-center"><u>Package Stars:</u></h4>
-                        <div class="cardf">
-                          <i class="fa fa-1x fa-bed" aria-hidden="true"></i>
-                          <i class="fa fa-plane" aria-hidden="true"></i>
-                          <i class="fa fa-cutlery" aria-hidden="true"></i>
-                          <i class="fa fa-taxi" aria-hidden="true"></i>
-                          <div class="stars">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" data-dismiss="modal" class="btn btn-danger">Close</button>
-                       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal6">Contact</button>
-                        <div class="modal fade" id="modal6">
-                          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable  ">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h4 class="text-center" style="color:red">Contact Us</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              </div>
-                              <div class="modal-body">
-                                <ul class="modalclass">
-                                  <li> <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i> </li>
-                                  <li> <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i></li>
-                                  <li><i class="fa fa-envelope-o" aria-hidden="true"></i> bookings@travewebs.com </li>
-                                  <li><i class="fa fa-envelope-o" aria-hidden="true"></i> operation@travewebs.com </li>
-                                  <li><i class="fa fa-envelope-o" aria-hidden="true"></i> escalation@travewebs.com</li>
-                                </ul>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </section>
-  <section class="choose" id="why">
-    <div class="container">
-      <h1 class="text-center">Why Choose Us</h1>
-      <div class="row">
-        <div class="col-md-3">
-          <img src="https://image.flaticon.com/icons/svg/608/608912.svg" class="WC mx-auto d-block rounded-circle img-thumbnail">
-          <h3 class="wchead">Handpicked Hotel</h3>
-          <p class="wcpara">We have handpicked hotel vendor and we have long association with them.</p>
-        </div>
-        <div class="col-md-3">
-          <img src="https://image.flaticon.com/icons/svg/761/761492.svg" class="WC mx-auto d-block rounded-circle img-thumbnail">
-          <h3 class="wchead">Affordable Price Gauranteed</h3>
-          <p class="wcpara">We have handpicked hotel vendor and we have long association with them.</p>
-        </div>
-        <div class="col-md-3">
-          <img src="https://image.flaticon.com/icons/svg/2664/2664632.svg" class="WC mx-auto d-block rounded-circle img-thumbnail">
-          <h3 class="wchead">Worldwide Destination</h3>
-          <p class="wcpara">We have handpicked hotel vendor and we have long association with them.</p>
-        </div>
-        <div class="col-md-3">
-          <img src="https://image.flaticon.com/icons/svg/889/889221.svg" class="WC mx-auto d-block rounded-circle img-thumbnail">
-          <h3 class="wchead">Highly qualified services</h3>
-          <p class="wcpara">We have handpicked hotel vendor and we have long association with them.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="carousell">
-    <div class="container">
-      <h1>Popular Desination</h1>
-      <div id="demo" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ul class="carousel-indicators">
-          <li data-target="#demo" data-slide-to="0" class="active"></li>
-          <li data-target="#demo" data-slide-to="1"></li>
-          <li data-target="#demo" data-slide-to="2"></li>
-        </ul>
-        <!-- The slideshow -->
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="row">
-              <div class="col-md-4  pt-2 bod">
-                <img src="https://cdn.pixabay.com/photo/2019/05/11/18/10/temple-4196229_1280.jpg" class="d-block w-100 img-fluid img-thumbnail">
-                <div class="carousel-caption">✓<h3 class="text-center carosel">Gujarat</h3>
-                </div>
-              </div>
-              <div class="col-md-4 pt-2">
-                <img src="https://cdn.pixabay.com/photo/2020/02/22/05/04/snow-4869330_1280.jpg" class="d-block w-100 img-fluid img-thumbnail">
-                <div class="carousel-caption">✓<h3 class="text-center carosel">Himachal Pradesh</h3>
-                </div>
-              </div>
-              <div class="col-md-4 pt-2">
-                <img src="https://cdn.pixabay.com/photo/2018/01/13/13/55/water-3080147_1280.jpg" class="d-block w-100 img-fluid img-thumbnail">
-                <div class="carousel-caption">✓<h3 class="text-center carosel">South India</h3>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-md-4  pt-2 bod">
-                <img src="https://cdn.pixabay.com/photo/2017/03/26/19/37/landscape-2176348_1280.jpg " class="d-block w-100 img-fluid img-thumbnail">
-                <div class="carousel-caption">✓<h3 class="text-center carosel">Kashmir</h3>
-                </div>
-              </div>
-              <div class="col-md-4 pt-2">
-                <img src="https://cdn.pixabay.com/photo/2017/08/28/20/24/mountains-2691172_1280.jpg " class="d-block w-100 img-fluid img-thumbnail">
-                <div class="carousel-caption">✓<h3 class="text-center carosel">Ladakh</h3>
-                </div>
-              </div>
-              <div class="col-md-4 pt-2">
-                <img src="https://cdn.pixabay.com/photo/2018/02/01/10/21/rajasthan-3122949_1280.jpg" class="d-block w-100 img-fluid img-thumbnail">
-                <div class="carousel-caption">✓<h3 class="text-center carosel">Rajasthan</h3>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-md-4  pt-2 bod">
-                <img src="https://cdn.pixabay.com/photo/2018/01/29/05/14/luxury-3115234_1280.jpg" class="d-block w-100 img-fluid img-thumbnail">
-                <div class="carousel-caption">✓<h3 class="text-center carosel">Andaman & Nicobar</h3>
-                </div>
-              </div>
-              <div class="col-md-4 pt-2">
-                <img src="https://cdn.pixabay.com/photo/2018/10/20/08/29/travel-3760375_1280.jpg   " class="d-block w-100 img-fluid img-thumbnail">
-                <div class="carousel-caption">✓<h3 class="text-center carosel">Sikkim</h3>
-                </div>
-              </div>
-              <div class="col-md-4 pt-2">
-                <img src="https://cdn.pixabay.com/photo/2020/01/22/12/11/rishikesh-4785189_1280.jpg " class="d-block w-100 img-fluid img-thumbnail">
-                <div class="carousel-caption">✓<h3 class="text-center carosel">Uttarakhand</h3>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Left and right controls -->
-        <a class="carousel-control-prev" href="#demo" data-slide="prev">
-          <span><i class="fa fa-2x fa-chevron-left" aria-hidden="true"></i> </span>
-        </a>
-        <a class="carousel-control-next" href="#demo" data-slide="next">
-          <span class="fnt"><i class="fa fa-2x fa-chevron-right" aria-hidden="true"></i> </span>
-        </a>
-      </div>
-    </div>
-  </section>
-  <section id="testimonyy" class="testimony">
-    <div class="container">
-      <h1>Traveller's Review</h1>
-      <div class="testi">
-        <div class="text">
-          <img src="https://image.flaticon.com/icons/svg/1807/1807867.svg" class="img-fluid  img-thumbnail rounded-circle w-20">
-          <h4>Krishna</h4>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star-half-o" aria-hidden="true"></i>
-          <p>Great experience with TraveWebs Holidays.Highly Recommended.</p>
-        </div>
-        <div class="text">
-          <img src="https://image.flaticon.com/icons/svg/1808/1808452.svg" class="img-fluid rounded-circle img-thumbnail w-20">
-          <h4>Shefali</h4>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star" aria-hidden="true"></i>
-          <i class="fa fa-star-half-o" aria-hidden="true"></i>
-          <i class="fa fa-star-o" aria-hidden="true"></i>
-          <p>Nice experience.Value for money.Thanks team making my trip memorable</p>
-        </div>
-      
-      </div>
-    </div>
-  </section>
-  <section id="con" class="contact">
-    <div class="container">
-      <h1>Contact Us</h1>
-      <div class="row">
-        <div class="col-md-6">
-          <h2>Hot Offer</h2>
-          <p>Book Holiday Package and Get10% to 20% flat discounts.</p>
-        </div>
-        <div class="col-md-6">
-          <div class="cont">
-            <i class="fa fa-phone" aria-hidden="true"> +91-9191919191, +91-9191919191</i>
-            <i class="fa fa-envelope-o" aria-hidden="true"> bookings@travewebs.com</i>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="compare" class="compe">
-   <div class="container pt-4">
-     <h1 class="text-center table">Comparison Table</h1>
-       <table>
-         <tr>
-           <th>Points</th>
-        
-           <th>TraveWebs Holidays</th>
-           <th>Other Websites</th>
-         </tr>
-         <tr>
-           <td>Service Satisfaction</td>
-           <td><i class="fa fa-check"></i></td>
-           <td><i class="fa fa-remove"></i></td>
-         </tr>
-         <tr>
-           <td>100% Customization</td>
-            <td><i class="fa fa-check"></i></td>
-            <td><i class="fa fa-remove"></i></td>
-         </tr>
-          <tr>
-            <td>100% Customization</td>
-            <td><i class="fa fa-check"></i></td>
-            <td><i class="fa fa-remove"></i></td>
-          </tr>
-           <tr>
-             <td>100% Customization</td>
-             <td><i class="fa fa-check"></i></td>
-             <td><i class="fa fa-remove"></i></td>
-           </tr>
-            <tr>
-              <td>100% Customization</td>
-              <td><i class="fa fa-check"></i></td>
-              <td><i class="fa fa-remove"></i></td>
-            </tr>
-             <tr>
-               <td>100% Customization</td>
-               <td><i class="fa fa-check"></i></td>
-               <td><i class="fa fa-remove"></i></td>
-             </tr>
-              <tr>
-                <td>100% Customization</td>
-                <td><i class="fa fa-check"></i></td>
-                <td><i class="fa fa-remove"></i></td>
-              </tr>
-               <tr>
-                 <td>100% Customization</td>
-                 <td><i class="fa fa-check"></i></td>
-                 <td><i class="fa fa-remove"></i></td>
-               </tr>
-                <tr>
-                  <td>100% Customization</td>
-                  <td><i class="fa fa-check"></i></td>
-                  <td><i class="fa fa-remove"></i></td>
-                </tr>
-                 <tr>
-                   <td>100% Customization</td>
-                   <td><i class="fa fa-check"></i></td>
-                   <td><i class="fa fa-remove"></i></td>
-                 </tr>
-         
-       </table>
-     </table></h1>
-   </div>
-  </section>
-  <section class="notes" id="note">
-    <div class="container">
-      <h1>Destinations USP</h1>
-      <ul>
-        <li>
-          <div class="nott">
-            <h3>Kerala</h3>
-            <h6>Gods Own Country</h6>
-            <p>Famous For: Hill station, Beaches,Tea Garden, Backwaters,Moving Houseboat,Ayurveda etc</p>
-          </div>
-        </li>
-         <li>
-           <div class="nott">
-             <h3>Kerala</h3>
-             <h6>Gods Own Country</h6>
-             <p>Famous For: Hill station, Beaches,Tea Garden, Backwaters,Moving Houseboat,Ayurveda etc</p>
-           </div>
-         </li>
-          <li>
-            <div class="nott">
-              <h3>Kerala</h3>
-              <h6>Gods Own Country</h6>
-              <p>Famous For: Hill station, Beaches,Tea Garden, Backwaters,Moving Houseboat,Ayurveda etc</p>
-            </div>
-          </li>
-           <li>
-             <div class="nott">
-               <h3>#Rajasthan</h3>
-               <h6>TraveWebs ko Rajasthan Kuch you Dikha</h6>
-               <p>Famous For: Desert, Temples, Forts, Lakes etc</p>
-             </div>
-           </li>
-            <li>
-              <div class="nott">
-                <h3>#Gujarat</h3>
-                <h6>1Glance of Gujarat</h6>
-                <p>Famous For: Beaches, Temple,National Park,World Highest Statue etc</p>
-              </div>
-            </li>
-             <li>
-               <div class="nott">
-                 <h3>#Himachal</h3>
-                 <h6>Queen Of Hill Stations</h6>
-                 <p>Famous For: Hill station, Snow activity, Cricket stadium,Mini Switzerland etc</p>
-               </div>
-             </li>
-              <li>
-                <div class="nott">
-                  <h3>#Laddakh</h3>
-                  <h6>Kings of Hills</h6>
-                  <p>Famous For: World Highest Motorable Pass,Pangong Lake etc</p>
-                </div>
-              </li>
-               <li>
-                 <div class="nott">
-                   <h3>#Goa</h3>
-                   <h6>City of Casino and Night Life</h6>
-                   <p>Famous For: Beaches, Sea Food, Night Life, Casinos, Goan Drink etc</p>
-                 </div>
-               </li>
-                      <li>
-                        <div class="nott">
-                          <h3>#Andaman</h3>
-                          <h6>Crystal Clear Beaches</h6>
-                          <p>Famous For: Mud valcano,Clytle Clear Beaches,Sun set point Chidia Tapu etc</p>
-                        </div>
-                      </li>
-      </ul>
-    </div>
-    
-  </section>
-  
-  <section class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 pt-4">
-          <h2>About</h2>
-          <a class="navbar-brand" href="#"><img src="https://image.flaticon.com/icons/svg/2373/2373830.svg " class="logo">TraveWebs</a>
-          <p>The only holiday partner deals in Clients Itinerary and Expectations.TraveWebs has experience Tour Expert who can give you unbeatable and memorable tour experience. </p>
-        </div>
-        <div class="col-md-4 pt-4">
-          <h2>Quick Link</h2>
-          <ul>
-            <li><a class="link" href="#header">-> Home</a></li>
-            <li><a href="#destination">-> Destinations</a></li>
-            <li><a href="#price"> -> Popular Location</a></li>
-            <li><a href="#con">-> Contact</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4 pt-4">
-          <h3>Contact Us</h3>
-          <ul>
-            <li> <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i> </li>
-            <i class="fa fa-phone" aria-hidden="true"> +91-9191919191</i>
-            <li><i class="fa fa-envelope-o" aria-hidden="true"></i> bookings@travewebs.com </li>
-            <li><i class="fa fa-envelope-o" aria-hidden="true"></i> operation@travewebs.com </li>
-            <li><i class="fa fa-envelope-o" aria-hidden="true"></i> escalation@travewebs.com</li>
-          </ul>
-        </div>
-      </div>
-      <hr>
-      <div class="social">
-        <a href="#con"><i class="fa fa-2x fa-facebook-official" aria-hidden="true"></i></a>
-        <a href="#con"><i class="fa fa-2x fa-instagram" aria-hidden="true"></i></a>
-        <a href="#con"><i class="fa fa-2x fa-linkedin-square" aria-hidden="true"></i></a>
-      </div>
-      <hr>
-      <p class="text-center b">Copyright©2022 Travel Walk Holidays<br>Desined by <a href="WebAddaInfotech.online">WebAddaInfotech</a></p>
-    </div>
-    
-  </section>
-  <!-- Scripts -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/animation.js"></script>
-  <script src="assets/js/imagesloaded.js"></script>
-  <script src="assets/js/custom.js"></script>
+<button class="open-btn" onclick="openPopup()">For My Beautiful Rose 💕</button>
 
-  
-  <script src="java.js"></script>
+<div class="popup" id="popup">
+  <h1>🌹 Happy Rose Day Lakshita 🌹</h1>
+  <p>
+    Like a rose spreads fragrance around,<br>
+    You spread love and happiness in my life ❤️<br>
+    Forever special… Forever mine 💖
+  </p>
+  <button class="close-btn" onclick="closePopup()">Close</button>
+</div>
+
+<div class="floating-text">Made with love 💕</div>
+
+<script>
+function openPopup() {
+  document.getElementById('popup').classList.add('active');
+  document.getElementById('overlay').classList.add('active');
+  startFalling();
+  showBouquet();
+}
+
+function closePopup() {
+  document.getElementById('popup').classList.remove('active');
+  document.getElementById('overlay').classList.remove('active');
+}
+
+// Falling roses & hearts
+function createFallItem() {
+  const item = document.createElement('div');
+  item.classList.add('fall');
+
+  const symbols = ['🌹','❤️','💖','🌹','💘','🌸'];
+  item.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+
+  item.style.left = Math.random() * window.innerWidth + 'px';
+  item.style.animationDuration = (4 + Math.random() * 4) + 's';
+  item.style.fontSize = (18 + Math.random() * 30) + 'px';
+
+  document.body.appendChild(item);
+
+  setTimeout(() => {
+    item.remove();
+  }, 8000);
+}
+
+function startFalling() {
+  setInterval(createFallItem, 250);
+}
+
+// 🌹 Show Animated Bouquet
+function showBouquet() {
+  const bouquet = document.createElement('div');
+  bouquet.classList.add('bouquet');
+  bouquet.innerHTML = "💐";
+
+  bouquet.style.left = "50%";
+  bouquet.style.transform = "translateX(-50%)";
+
+  document.body.appendChild(bouquet);
+
+  setTimeout(() => {
+    bouquet.remove();
+  }, 6000);
+}
+</script>
+
 </body>
 </html>
+
