@@ -37,7 +37,7 @@ body {
   opacity: 1;
 }
 
-/* Romantic Button */
+/* Romantic Button (used for both open & close) */
 .open-btn {
   padding: 15px 35px;
   font-size: 1.2rem;
@@ -53,6 +53,12 @@ body {
 
 .open-btn:hover {
   transform: scale(1.1);
+}
+
+/* Make button fit nicely inside popup */
+.popup .open-btn {
+  margin-top: 18px;
+  width: 100%;
 }
 
 /* Popup */
@@ -115,7 +121,7 @@ body {
 .bouquet {
   position: absolute;
   bottom: -120px;
-  font-size: 80px;
+  font-size: 90px;
   animation: riseBouquet 2s ease-out forwards, float 3s infinite ease-in-out;
   opacity: 0;
 }
@@ -139,6 +145,30 @@ body {
   100% { transform: translateY(0px); }
 }
 
+/* 💋 Kiss Zoom-Out & Fade Effect */
+.kiss {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  font-size: 70px;
+  opacity: 1;
+  animation: kissAnim 2s ease-out forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes kissAnim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+
 /* Floating little message */
 .floating-text {
   position: absolute;
@@ -159,14 +189,14 @@ body {
 <div class="popup" id="popup">
   <h1>🌹 Happy Rose Day Lakshita 🌹</h1>
   <p>
-    Like a rose spreads fragrance around,<br>
-    You spread love and happiness in my life ❤️<br>
-    Forever special… Forever mine 💖
+    Ye Pyara sa rose meri Rose k lie<br>
+    Jiske Gal Rose Jaise Gulabi hai 😍 ❤️<br>
+    or Mehak Gulab Jaisi hai 💖
   </p>
-  <button class="close-btn" onclick="closePopup()">Close</button>
+  <button class="open-btn" onclick="closeWithKiss()">For My Beautiful Rose 💕</button>
 </div>
 
-<div class="floating-text">Made with love 💕</div>
+<div class="floating-text">Made for V💕L </div>
 
 <script>
 function openPopup() {
@@ -179,6 +209,12 @@ function openPopup() {
 function closePopup() {
   document.getElementById('popup').classList.remove('active');
   document.getElementById('overlay').classList.remove('active');
+}
+
+// NEW FUNCTION: Close popup + show 😘
+function closeWithKiss() {
+  closePopup();
+  showKiss();
 }
 
 // Falling roses & hearts
@@ -219,8 +255,20 @@ function showBouquet() {
     bouquet.remove();
   }, 6000);
 }
+
+// 💋 Show kiss emoji zoom-out & fade
+function showKiss() {
+  const kiss = document.createElement('div');
+  kiss.classList.add('kiss');
+  kiss.innerHTML = "😘";
+
+  document.body.appendChild(kiss);
+
+  setTimeout(() => {
+    kiss.remove();
+  }, 2000);
+}
 </script>
 
 </body>
 </html>
-
