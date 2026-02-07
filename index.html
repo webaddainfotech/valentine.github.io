@@ -2,271 +2,112 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Happy Propose Day</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Rose Day</title>
-
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(circle at top, #ffd1dc, #ff9a9e, #fad0c4);
-  font-family: 'Segoe UI', sans-serif;
-  overflow: hidden;
-  text-align: center;
+body{
+margin:0;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:radial-gradient(circle,#ffe6f2,#ffb6c1,#ff9a9e);
+font-family:'Segoe UI';
+overflow:hidden;
+text-align:center;
 }
 
-/* Soft overlay when popup opens */
-.overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(4px);
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.5s;
+.open-btn{
+padding:15px 35px;
+border:none;
+border-radius:40px;
+background:linear-gradient(45deg,#d63384,#ff5f9e);
+color:white;
+font-size:1.2rem;
+cursor:pointer;
 }
 
-.overlay.active {
-  opacity: 1;
+.popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+background:white;
+padding:25px;
+border-radius:25px;
+transition:.5s;
 }
 
-/* Romantic Button (used for both open & close) */
-.open-btn {
-  padding: 15px 35px;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 40px;
-  background: linear-gradient(45deg, #ff2e63, #ff5f9e);
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-  transition: 0.3s;
-  z-index: 2;
+.popup.active{
+transform:translate(-50%,-50%) scale(1);
 }
 
-.open-btn:hover {
-  transform: scale(1.1);
+.fall{
+position:absolute;
+top:-10vh;
+animation:fall 6s linear forwards;
 }
 
-/* Make button fit nicely inside popup */
-.popup .open-btn {
-  margin-top: 18px;
-  width: 100%;
+@keyframes fall{
+to{
+transform:translateY(110vh);
+opacity:0;
+}
 }
 
-/* Popup */
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background: linear-gradient(white, #fff0f5);
-  width: 90%;
-  max-width: 360px;
-  padding: 28px 22px;
-  border-radius: 25px;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.3);
-  text-align: center;
-  z-index: 5;
-  transition: 0.5s ease;
-  border: 2px solid #ffb6c1;
+/* ---- NEW FOOTER STYLE ---- */
+.floating-text{
+position:fixed;
+bottom:20px;
+width:100%;
+text-align:center;
+font-size:18px;
+font-weight:bold;
+color:white;
+text-shadow:0 0 10px #ff2e63;
+letter-spacing:1px;
+animation:fadeIn 2s ease-in-out;
 }
 
-.popup.active {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.popup h1 {
-  margin: 0;
-  color: #ff2e63;
-  font-size: clamp(1.6rem, 5vw, 2.3rem);
-  text-shadow: 0 0 8px rgba(255,46,99,0.3);
-  animation: glow 1.5s infinite alternate;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 5px rgba(255,46,99,0.3); }
-  to { text-shadow: 0 0 12px rgba(255,46,99,0.6); }
-}
-
-/* Falling items */
-.fall {
-  position: absolute;
-  top: -10vh;
-  font-size: 24px;
-  animation: fallAnim linear forwards;
-  pointer-events: none;
-  user-select: none;
-}
-
-@keyframes fallAnim {
-  0% {
-    transform: translateY(-10vh) scale(0.8) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(110vh) scale(1.2) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-/* 🌹 Animated Rose Bouquet */
-.bouquet {
-  position: absolute;
-  bottom: -120px;
-  font-size: 90px;
-  animation: riseBouquet 2s ease-out forwards, float 3s infinite ease-in-out;
-  opacity: 0;
-}
-
-@keyframes riseBouquet {
-  from {
-    bottom: -120px;
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    bottom: 120px;
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-/* 💋 Kiss Zoom-Out & Fade Effect */
-.kiss {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.5);
-  font-size: 70px;
-  opacity: 1;
-  animation: kissAnim 2s ease-out forwards;
-  pointer-events: none;
-  z-index: 10;
-}
-
-@keyframes kissAnim {
-  0% {
-    transform: translate(-50%, -50%) scale(0.5);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(3);
-    opacity: 0;
-  }
-}
-
-/* Floating little message */
-.floating-text {
-  position: absolute;
-  bottom: 20px;
-  color: white;
-  font-size: 1rem;
-  opacity: 0.8;
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
 }
 </style>
 </head>
-
 <body>
 
-<div class="overlay" id="overlay"></div>
-
-<button class="open-btn" onclick="openPopup()">For My Beautiful Rose 💕</button>
+<button class="open-btn" onclick="openPopup()">Propose to My Love 💍</button>
 
 <div class="popup" id="popup">
-  <h1>🌹 Happy Rose Day Lakshita 🌹</h1>
-  <p>
-    Ye Pyara sa rose meri Rose k lie<br>
-    Jiske Gal Rose Jaise Gulabi hai 😍 ❤️<br>
-    or Mehak Gulab Jaisi hai 💖
-  </p>
-  <button class="open-btn" onclick="closeWithKiss()">For My Beautiful Rose 💕</button>
+<h1>💍 Happy Propose Day Lakshita 💍</h1>
+<p> Apko Aaj bhi propose karte hue vaise hi pet me butterfly feel hoti hai jab maine apko first time propose kia tha🫠 ❤️</p>
+<br>
+<p> Kya app mujhe apna romantic tang karne wala person banaoge 🥰🤭 </p>
+<button class="open-btn" onclick="closePopup()">Yes, I Will 💖</button>
 </div>
 
-<div class="floating-text">Made for V💕L </div>
-
+<!-- FOOTER ADDED HERE -->
+<div class="floating-text">Made for V💕L</div>
 <script>
-function openPopup() {
-  document.getElementById('popup').classList.add('active');
-  document.getElementById('overlay').classList.add('active');
-  startFalling();
-  showBouquet();
+function openPopup(){
+document.getElementById('popup').classList.add('active');
+startFall();
 }
 
-function closePopup() {
-  document.getElementById('popup').classList.remove('active');
-  document.getElementById('overlay').classList.remove('active');
+function closePopup(){
+document.getElementById('popup').classList.remove('active');
 }
 
-// NEW FUNCTION: Close popup + show 😘
-function closeWithKiss() {
-  closePopup();
-  showKiss();
-}
-
-// Falling roses & hearts
-function createFallItem() {
-  const item = document.createElement('div');
-  item.classList.add('fall');
-
-  const symbols = ['🌹','❤️','💖','🌹','💘','🌸'];
-  item.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
-
-  item.style.left = Math.random() * window.innerWidth + 'px';
-  item.style.animationDuration = (4 + Math.random() * 4) + 's';
-  item.style.fontSize = (18 + Math.random() * 30) + 'px';
-
-  document.body.appendChild(item);
-
-  setTimeout(() => {
-    item.remove();
-  }, 8000);
-}
-
-function startFalling() {
-  setInterval(createFallItem, 250);
-}
-
-// 🌹 Show Animated Bouquet
-function showBouquet() {
-  const bouquet = document.createElement('div');
-  bouquet.classList.add('bouquet');
-  bouquet.innerHTML = "💐";
-
-  bouquet.style.left = "50%";
-  bouquet.style.transform = "translateX(-50%)";
-
-  document.body.appendChild(bouquet);
-
-  setTimeout(() => {
-    bouquet.remove();
-  }, 6000);
-}
-
-// 💋 Show kiss emoji zoom-out & fade
-function showKiss() {
-  const kiss = document.createElement('div');
-  kiss.classList.add('kiss');
-  kiss.innerHTML = "😘";
-
-  document.body.appendChild(kiss);
-
-  setTimeout(() => {
-    kiss.remove();
-  }, 2000);
+function startFall(){
+setInterval(()=>{
+const d=document.createElement('div');
+d.className='fall';
+d.innerHTML='💍';
+d.style.left=Math.random()*innerWidth+'px';
+document.body.appendChild(d);
+setTimeout(()=>d.remove(),6000);
+},300);
 }
 </script>
 
