@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Kiss Day</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{margin:0;min-height:100vh;display:flex;justify-content:center;align-items:center;
+background:radial-gradient(circle,#ffe4e1,#ff9a9e,#ff69b4);
+font-family:'Segoe UI';overflow:hidden;text-align:center;}
+.open-btn{padding:15px 35px;border:none;border-radius:40px;
+background:linear-gradient(45deg,#ff2e63,#ff5f9e);color:white;font-size:1.2rem;}
+.popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
+background:white;padding:25px;border-radius:25px;transition:.5s;}
+.popup.active{transform:translate(-50%,-50%) scale(1);}
+.kiss{position:fixed;top:50%;left:50%;font-size:70px;animation:kiss 2s forwards;}
+@keyframes kiss{to{transform:scale(3);opacity:0;}}
+</style>
+</head>
+<body>
+<button class="open-btn" onclick="openPopup()">Send a Kiss 😘</button>
+
+<div class="popup" id="popup">
+<h1>😘 Happy Kiss Day Lakshita 😘</h1>
+<p>Ek pyara sa kiss sirf tumhare liye ❤️</p>
+<button class="open-btn" onclick="closeWithKiss()">For My Love 💖</button>
+</div>
+
+<script>
+function openPopup(){document.getElementById('popup').classList.add('active');}
+function closePopup(){document.getElementById('popup').classList.remove('active');}
+function closeWithKiss(){
+closePopup();
+const k=document.createElement('div');k.className='kiss';k.innerHTML='😘';
+document.body.appendChild(k);setTimeout(()=>k.remove(),2000);
+}
+</script>
+</body>
+</html>
