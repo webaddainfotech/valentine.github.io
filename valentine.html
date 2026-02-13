@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Funny Valentine 😜</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+margin:0;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:radial-gradient(circle,#ffe6f2,#ff9a9e,#ff1493);
+font-family:'Segoe UI';
+overflow:hidden;
+text-align:center;
+}
+
+/* Main Button */
+.open-btn{
+padding:15px 35px;
+border:none;
+border-radius:40px;
+background:linear-gradient(45deg,#ff2e63,#ff5f9e);
+color:white;
+font-size:1.2rem;
+cursor:pointer;
+transition:.3s;
+}
+
+.open-btn:hover{
+transform:scale(1.1);
+}
+
+/* Popup Box */
+.popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+background:white;
+padding:25px;
+border-radius:25px;
+transition:.4s;
+width:85%;
+max-width:350px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.popup.active{
+transform:translate(-50%,-50%) scale(1);
+}
+
+/* Buttons Inline */
+.buttons{
+margin-top:20px;
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+/* Yes & No Buttons */
+.fun-btn{
+padding:10px 25px;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#ff2e63,#ff5f9e);
+color:white;
+cursor:pointer;
+transition:0.3s;
+position:relative;
+}
+
+/* Second Popup */
+.quote-popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+background:#fff;
+padding:25px;
+border-radius:25px;
+transition:.4s;
+width:85%;
+max-width:350px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.quote-popup.active{
+transform:translate(-50%,-50%) scale(1);
+}
+</style>
+</head>
+
+<body>
+
+<button class="open-btn" onclick="openMain()">Ye Button Toda Shrmila Hai but click Kariye 💃 😜</button>
+
+<!-- First Popup -->
+<div class="popup" id="mainPopup">
+  <h2>Happy Valentine’s Day Lakshita 😍❤️🥰 </h2>
+<h2>Will You Be My Valentine? 💖</h2>
+
+<div class="buttons">
+<button class="fun-btn" onclick="yesClicked()">Yes 😍</button>
+<button class="fun-btn" id="noBtn">No 🙄</button>
+</div>
+</div>
+
+<!-- Second Funny Popup -->
+<div class="quote-popup" id="quotePopup">
+<h2>🤭 Congratulations 🤭 </h2>
+<p>App meri<br><b>Pyari Queen 👑 + Comedy Partner 😂</b> ban gye ho 😆</p>
+<button class="fun-btn" onclick="closeAll()">Haan Ji😆</button>
+</div>
+
+<script>
+
+/* Open First Popup */
+function openMain(){
+document.getElementById('mainPopup').classList.add('active');
+}
+
+/* YES Click */
+function yesClicked(){
+document.getElementById('mainPopup').classList.remove('active');
+document.getElementById('quotePopup').classList.add('active');
+}
+
+/* Close All */
+function closeAll(){
+document.getElementById('quotePopup').classList.remove('active');
+}
+
+/* NO Button Run Away Effect */
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+    const moveX = (Math.random() - 0.5) * 200;
+    const moveY = (Math.random() - 0.5) * 200;
+
+    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+});
+
+</script>
+
+</body>
+</html>
