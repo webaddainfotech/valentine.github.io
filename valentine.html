@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Funny Valentine 😜</title>
+<title> Valentine 😜</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -96,24 +96,29 @@ transform:translate(-50%,-50%) scale(1);
 
 <body>
 
-<button class="open-btn" onclick="openMain()">Ye Button Toda Shrmila Hai but click Kariye 💃 😜</button>
+<button class="open-btn" onclick="openMain()">
+Ye Button Thoda Sharmila Hai 😜 Click Kariye 💃
+</button>
 
 <!-- First Popup -->
 <div class="popup" id="mainPopup">
-  <h2>Happy Valentine’s Day Lakshita 😍❤️🥰 </h2>
-<h2>Will You Be My Valentine? 💖</h2>
+  <h2>Happy Valentine’s Day Lakshita 😍❤️🥰</h2>
+  <h3>Will You Be My Valentine? 💖</h3>
 
-<div class="buttons">
-<button class="fun-btn" onclick="yesClicked()">Yes 😍</button>
-<button class="fun-btn" id="noBtn">No 🙄</button>
-</div>
+  <div class="buttons">
+    <button class="fun-btn" onclick="yesClicked()">Yes 😍</button>
+    <button class="fun-btn" id="noBtn">No 🙄</button>
+  </div>
 </div>
 
 <!-- Second Funny Popup -->
 <div class="quote-popup" id="quotePopup">
-<h2>🤭 Congratulations 🤭 </h2>
-<p>App meri<br><b>Pyari Queen 👑 + Comedy Partner 😂</b> ban gye ho 😆</p>
-<button class="fun-btn" onclick="closeAll()">Haan Ji😆</button>
+<h2>🤭 Congratulations 🤭</h2>
+<p>
+App meri <br>
+<b>Pyari Queen 👑 + Comedy Partner 😂</b> ban gaye ho 😆❤️
+</p>
+<button class="fun-btn" onclick="closeAll()">Haan Ji 😆</button>
 </div>
 
 <script>
@@ -134,14 +139,30 @@ function closeAll(){
 document.getElementById('quotePopup').classList.remove('active');
 }
 
-/* NO Button Run Away Effect */
+/* NO Button Run Away (Desktop + Mobile) */
 const noBtn = document.getElementById("noBtn");
+const popup = document.getElementById("mainPopup");
 
-noBtn.addEventListener("mouseover", () => {
-    const moveX = (Math.random() - 0.5) * 200;
-    const moveY = (Math.random() - 0.5) * 200;
+function moveButton(){
+    const popupRect = popup.getBoundingClientRect();
 
-    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    const maxX = popupRect.width - noBtn.offsetWidth - 40;
+    const maxY = popupRect.height - noBtn.offsetHeight - 40;
+
+    const randomX = Math.random() * maxX - maxX/2;
+    const randomY = Math.random() * maxY - maxY/2;
+
+    noBtn.style.transition = "transform 0.2s ease";
+    noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+}
+
+/* Desktop */
+noBtn.addEventListener("mouseover", moveButton);
+
+/* Mobile */
+noBtn.addEventListener("touchstart", function(e){
+    e.preventDefault();
+    moveButton();
 });
 
 </script>
